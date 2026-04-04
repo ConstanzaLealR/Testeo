@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const phoneNumber = "56931734761";
+  const phoneNumber = "5692999340";
 
   const products = [
     // ========== PINTURAS ==========
