@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-    console.log("URL de WhatsApp generada:", whatsappUrl); // 👈 SOLO AGREGAR ESTA LÍNEA
+    console.log("URL de WhatsApp generada:", whatsappUrl);
     
     if (modalBtn) modalBtn.href = whatsappUrl;
   }
@@ -326,6 +326,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  // ==================== BOTÓN CATÁLOGO ====================
+const catalogoBtn = document.getElementById("catalogoBtn");
+if (catalogoBtn) {
+  catalogoBtn.addEventListener("click", () => {
+    const catalogoTitle = document.querySelector(".featured-carousel-title");
+    if (catalogoTitle) {
+      const titlePosition = catalogoTitle.getBoundingClientRect().top + window.pageYOffset;
+      const offset = 80;
+      window.scrollTo({
+        top: titlePosition - offset,
+        behavior: "smooth"
+      });
+    }
+  });
+}
+
   // ==================== MODAL TÉRMINOS ====================
   const termsModal = document.getElementById("termsModal");
   const closeTerms = document.querySelector(".close-terms");
@@ -366,7 +383,275 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ==================== BOTONES DEL CARRUSEL ====================
+  function setupCarouselButtons() {
+    // Botones "Ver más" (scroll a productos)
+    const scrollBtns = document.querySelectorAll('.scroll-products-btn');
+    scrollBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollToProducts();
+      });
+    });
+
+    // Botón "Ver envíos" (abre envios.html en nueva pestaña)
+    const shippingBtn = document.querySelector('.shipping-btn');
+    if (shippingBtn) {
+      shippingBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.open('pages/envios.html', '_blank');
+      });
+    }
+  }
+  
+  setupCarouselButtons();
+
   // ==================== INICIALIZAR ====================
   initFromURL();
 
+// ==================== CARRUSEL DE PRODUCTOS DESTACADOS (19 SLIDES) ====================
+// ==================== CARRUSEL DE PRODUCTOS DESTACADOS (3 VISIBLES) ====================
+let featuredIndex = 0;
+let featuredInterval;
+let slidesPerView = 3;
+
+function renderFeaturedCarousel() {
+  const container = document.getElementById('featuredSlides');
+  
+  if (!container) {
+    console.error("❌ ERROR: No se encontró el elemento 'featuredSlides'");
+    return;
+  }
+  
+  const phoneNumber = "56992999340";
+  
+  // Generar 19 productos
+  container.innerHTML = '';
+  
+  for (let i = 1; i <= 19; i++) {
+    const slide = document.createElement('div');
+    slide.className = 'featured-slide-item';
+    
+    slide.innerHTML = `
+      <img src="" alt="Producto ${i}" data-slot="${i}">
+      <div class="featured-slide-content">
+        <button class="featured-whatsapp-btn" data-producto="Producto ${i}">
+          Lo quiero
+        </button>
+      </div>
+    `;
+    
+    container.appendChild(slide);
+  }
+  
+  // Configurar eventos de WhatsApp
+  setupFeaturedWhatsAppButtons();
+  
+  // Ajustar slides por visibilidad según tamaño de pantalla
+  updateSlidesPerView();
+  window.addEventListener('resize', () => {
+    updateSlidesPerView();
+    resetFeaturedCarousel();
+  });
+}
+
+function updateSlidesPerView() {
+  if (window.innerWidth <= 600) {
+    slidesPerView = 1;
+  } else if (window.innerWidth <= 900) {
+    slidesPerView = 2;
+  } else {
+    slidesPerView = 3;
+  }
+}
+
+function setupFeaturedWhatsAppButtons() {
+  const phoneNumber = "56992999340";
+  const buttons = document.querySelectorAll('.featured-whatsapp-btn');
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const productName = btn.getAttribute('data-producto') || 'este producto';
+      const message = encodeURIComponent(`Hola, quiero comprar ${productName}`);
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  });
+}
+
+function initFeaturedCarousel() {
+  const slidesContainer = document.getElementById('featuredSlides');
+  const carousel = document.getElementById('featuredCarousel');
+  
+  if (!slidesContainer || !carousel) return;
+  
+  const totalProducts = slidesContainer.children.length;
+  let maxIndex = Math.max(0, totalProducts - slidesPerView);
+  let direction = 1; // 1 = adelante, -1 = atrás
+  
+  function showFeaturedSlide() {
+    if (featuredIndex > maxIndex) featuredIndex = maxIndex;
+    if (featuredIndex < 0) featuredIndex = 0;
+    
+    if (featuredIndex === maxIndex && maxIndex > 0) {
+      const slideItems = slidesContainer.querySelectorAll('.featured-slide-item');
+      if (slideItems.length > 0) {
+        const slideWidth = slideItems[0].offsetWidth;
+        const gap = 20;
+        const exactTranslate = -(maxIndex * (slideWidth + gap));
+        slidesContainer.style.transform = `translateX(${exactTranslate}px)`;
+        return;
+      }
+    }
+    
+    const translateValue = -(featuredIndex * (100 / slidesPerView));
+    slidesContainer.style.transform = `translateX(${translateValue}%)`;
+  }
+  
+  const nextBtn = document.querySelector('.featured-next');
+  const prevBtn = document.querySelector('.featured-prev');
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      direction = 1; // Reinicia dirección al usar botón siguiente
+      if (featuredIndex < maxIndex) {
+        featuredIndex++;
+        showFeaturedSlide();
+        resetAutoSlideFeatured();
+      }
+    });
+  }
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      direction = -1; // Reinicia dirección al usar botón anterior
+      if (featuredIndex > 0) {
+        featuredIndex--;
+        showFeaturedSlide();
+        resetAutoSlideFeatured();
+      }
+    });
+  }
+  
+  function startAutoSlideFeatured() {
+    if (featuredInterval) clearInterval(featuredInterval);
+    featuredInterval = setInterval(() => {
+      let newIndex = featuredIndex + direction;
+      
+      if (newIndex > maxIndex) {
+        direction = -1; // Cambia dirección hacia atrás
+        newIndex = maxIndex - 1;
+      } else if (newIndex < 0) {
+        direction = 1; // Cambia dirección hacia adelante
+        newIndex = 1;
+      }
+      
+      featuredIndex = newIndex;
+      showFeaturedSlide();
+    }, 3000);
+  }
+  
+  function stopAutoSlideFeatured() {
+    clearInterval(featuredInterval);
+  }
+  
+  function resetAutoSlideFeatured() {
+    stopAutoSlideFeatured();
+    startAutoSlideFeatured();
+  }
+  
+  carousel.addEventListener('mouseenter', stopAutoSlideFeatured);
+  carousel.addEventListener('mouseleave', startAutoSlideFeatured);
+  
+  // INICIAR AUTOPLAY
+  showFeaturedSlide();
+  startAutoSlideFeatured();
+}
+
+function resetFeaturedCarousel() {
+  const slidesContainer = document.getElementById('featuredSlides');
+  if (!slidesContainer) return;
+  
+  const totalProducts = slidesContainer.children.length;
+  const maxIndex = Math.max(0, totalProducts - slidesPerView);
+  
+  if (featuredIndex > maxIndex) featuredIndex = maxIndex;
+  if (featuredIndex < 0) featuredIndex = 0;
+  
+  const translateValue = -(featuredIndex * (100 / slidesPerView));
+  slidesContainer.style.transform = `translateX(${translateValue}%)`;
+}
+
+// Asignar tus imágenes reales aquí
+function setProductImages() {
+  const slides = document.querySelectorAll('.featured-slide-item');
+  
+  // Asigna cada imagen manualmente:
+  if(slides[0]) slides[0].querySelector('img').src = 'img/image1.png';
+  if(slides[1]) slides[1].querySelector('img').src = 'img/image2.png';
+  if(slides[2]) slides[2].querySelector('img').src = 'img/image3.png';
+  if(slides[3]) slides[3].querySelector('img').src = 'img/image4.png';
+  if(slides[4]) slides[4].querySelector('img').src = 'img/image5.png';
+  if(slides[5]) slides[5].querySelector('img').src = 'img/image6.png';
+  if(slides[6]) slides[6].querySelector('img').src = 'img/image7.png';
+  if(slides[7]) slides[7].querySelector('img').src = 'img/image8.png';
+  if(slides[8]) slides[8].querySelector('img').src = 'img/image9.png';
+  if(slides[9]) slides[9].querySelector('img').src = 'img/image10.png';
+  if(slides[10]) slides[10].querySelector('img').src = 'img/image11.png';
+  if(slides[11]) slides[11].querySelector('img').src = 'img/image12.png';
+  if(slides[12]) slides[12].querySelector('img').src = 'img/image13.png';
+  if(slides[13]) slides[13].querySelector('img').src = 'img/image14.png';
+  if(slides[14]) slides[14].querySelector('img').src = 'img/image15.png';
+  if(slides[15]) slides[15].querySelector('img').src = 'img/image16.png';
+  if(slides[16]) slides[16].querySelector('img').src = 'img/image17.png';
+  if(slides[17]) slides[17].querySelector('img').src = 'img/image18.png';
+  if(slides[18]) slides[18].querySelector('img').src = 'img/image19.png';
+}
+
+function setProductNames() {
+  const buttons = document.querySelectorAll('.featured-whatsapp-btn');
+  
+  // Lista de tus 19 productos en orden
+  const nombres = [
+    "ABRILLANTADOR CERAMICO PISOS LISOS",
+    "ABRILLANTADOR CERAMICO POROSO 1 LTS",
+    "ABRILLANTADOR CERAMICO POROSO 2 LTS",
+    "ABRILLANTADOR PISO FLOTANTE",
+    "ANTIGRASA",
+    "CERA ACRILICA ROJA 2 LTS",
+    "CERA ACRILICA",
+    "CERA COLORES 2 LTS",
+    "CERA COLORES 5 LTS",
+    "DECAPADOR",
+    "DESENCRUSTANTE",
+    "ELIMINADOR OLORES",
+    "LAVALOZAS",
+    "PINTURA ACRILICA 2 LTS",
+    "PINTURA BLANCA MURO",
+    "PINTURA PARA MURO",
+    "PINTURA",
+    "SELLANTE",
+    "VITRIFICANTE"
+  ];
+  
+  buttons.forEach((btn, idx) => {
+    if (nombres[idx]) {
+      btn.setAttribute('data-producto', nombres[idx]);
+    }
+  });
+  
+  console.log("✅ Nombres de productos asignados correctamente");
+}
+
+// INICIALIZAR TODO
+renderFeaturedCarousel();
+initFeaturedCarousel();
+setProductImages();
+
+// Llamar a setProductNames() después de que el carrusel esté listo
+setTimeout(() => {
+  setProductNames();
+}, 100);
 });
+

@@ -35,64 +35,81 @@
 <nav class="categories">
   <button onclick="filterProducts('all')">INICIO</button>
   <button id="productosBtn">PRODUCTOS</button>
+  <button id="catalogoBtn">CATÁLOGO</button>
   <button id="contactBtn">CONTACTO</button>
 </nav>
 
-<!-- 🎞️ CARRUSEL -->
+<!-- 🎞️ CARRUSEL CON BOTONES -->
 <div class="carousel" id="carousel">
   <button class="prev">❮</button>
-
   <div class="slides" id="slides">
-    <img src="https://picsum.photos/1200/300?random=1" />
-    <img src="https://picsum.photos/1200/300?random=2" />
-    <img src="https://picsum.photos/1200/300?random=3" />
+    <div class="slide-item">
+      <img src="img/Portada1.png" alt="Portada 1">
+      <button class="slide-btn scroll-products-btn">Ver más</button>
+    </div>
+    <div class="slide-item">
+      <img src="img/Fondo1.png" alt="Fondo 1">
+      <button class="slide-btn scroll-products-btn">Ver más</button>
+    </div>
+    <div class="slide-item">
+      <img src="img/Portada3.png" alt="Portada 3">
+      <button class="slide-btn shipping-btn">Ver envíos</button>
+    </div>
   </div>
-
   <button class="next">❯</button>
 </div>
 
-<!-- 📝 SECCIÓN INFORMATIVA (NUEVA) -->
+<!-- 📝 SECCIÓN INFORMATIVA -->
 <section class="info-section">
   <div class="info-container">
-
-    <!-- 🖼️ IMAGEN FLOTANTE -->
     <img src="img/productos.png" class="info-products">
-
     <h2>Bienvenido a nuestra tienda</h2>
     <p>
       Encuentra los mejores productos de limpieza para tu hogar o negocio.
       Calidad garantizada y resultados efectivos.
     </p>
-
     <a href="pages/acerca.html" class="info-btn">
         Conócenos →
     </a>
-
   </div>
 </section>
 
 <!-- 🌟 SECCIÓN DE VALORES -->
 <section class="values-section">
   <div class="values-container">
-    
     <div class="value-card">
       <div class="value-icon">✨</div>
       <h3>Calidad</h3>
       <p>Desarrollamos los mejores productos para cuidar de tu hogar y crear un mundo más limpio y cuidadoso con el medio ambiente.</p>
     </div>
-
     <div class="value-card">
       <div class="value-icon">💰</div>
       <h3>Conveniencia</h3>
       <p>Ofrecemos la mejor relación precio-calidad para que puedas acceder a un mundo de soluciones priorizando tu presupuesto.</p>
     </div>
-
     <div class="value-card">
       <div class="value-icon">🚀</div>
       <h3>Innovación</h3>
       <p>Búsqueda continua por ofrecer las mejores soluciones, desarrollando nuevos y mejores productos alineados a las tendencias de mercado.</p>
     </div>
+  </div>
+</section>
 
+<!-- ⭐ PRODUCTOS DESTACADOS - CARRUSEL DE IMÁGENES -->
+<section class="featured-carousel-section">
+  <div class="featured-carousel-header">
+    <h2 class="featured-carousel-title">⭐ CATÁLOGO </h2>
+    <p class="featured-carousel-subtitle">Los más vendidos de esta temporada</p>
+  </div>
+
+  <div class="featured-carousel" id="featuredCarousel">
+    <button class="featured-prev">❮</button>
+    <div class="featured-slides-wrapper">
+      <div class="featured-slides" id="featuredSlides">
+        <!-- Los 19 productos se generarán aquí con JavaScript -->
+      </div>
+    </div>
+    <button class="featured-next">❯</button>
   </div>
 </section>
 
@@ -110,12 +127,9 @@
 <div id="imageModal" class="modal">
   <div class="modal-box">
     <span class="close">&times;</span>
-
     <img id="modalImg">
-
     <h2 id="modalTitle"></h2>
     <div id="modalPrice" class="price"></div>
-
     <a id="modalBtn" target="_blank" class="modal-whatsapp-btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zm0 18.38c-1.49 0-2.95-.4-4.21-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.81-1.29-1.24-2.77-1.24-4.27 0-4.46 3.63-8.09 8.09-8.09 4.46 0 8.09 3.63 8.09 8.09.01 4.46-3.62 8.09-8.08 8.09zm4.43-6.06c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.7 2.59 4.11 3.63.57.25 1.02.4 1.37.51.58.18 1.1.15 1.51.09.46-.06 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
@@ -128,18 +142,16 @@
 <!-- 🔻 FOOTER -->
 <footer class="footer">
   <div class="footer-container">
-
     <div class="footer-section">
       <h3>Nosotros</h3>
       <p>Somos una tienda dedicada a productos de limpieza de alta calidad para el hogar y empresas.</p>
     </div>
-
     <div class="footer-section">
       <h3>Contacto</h3>
       <p>📞 +56 9 9299 9340</p>
       <p>📞 +56 9 9254 9403</p>
       <div class="social-icons">
-          <a href="https://wa.me/56992999340" target="_blank" class="social-icon">
+        <a href="https://wa.me/56992999340" target="_blank" class="social-icon">
           <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
         </a>
         <a href="https://www.tiktok.com/@pinturaspisos.brillos" target="_blank" class="social-icon">
@@ -147,7 +159,6 @@
         </a>
       </div>
     </div>
-
     <div class="footer-section">
       <h3>Información</h3>
       <ul>
@@ -156,10 +167,8 @@
         <li><a href="#" onclick="openTerms()">Términos y condiciones</a></li>
       </ul>
     </div>
-
   </div>
 
- <!-- 📍 DIRECCIÓN (arriba del copyright) -->
   <div class="footer-address">
     <p>📍 Av. Sur 915, 8030433 El Bosque, Región Metropolitana, Chile</p>
   </div>
@@ -179,31 +188,22 @@
   <div class="modal-box modal-large">
     <span class="close-terms">&times;</span>
     <div id="termsContent">
-      <!-- CONTENIDO COMPLETO DE TÉRMINOS -->
       <div class="terms-card">
         <h1>📋 Términos y Condiciones</h1>
-
         <p>Al utilizar este sitio web, aceptas los siguientes términos y condiciones:</p>
-
         <h2>📌 Uso del sitio</h2>
         <p>El usuario se compromete a utilizar este sitio de forma responsable y sin infringir la ley.</p>
-
         <div class="highlight-box">
           <strong>✨ Nuestro compromiso:</strong> Productos de limpieza de alta calidad que <strong>no se salen con el agua</strong>, pensados para durar.
         </div>
-
         <h2>📦 Productos</h2>
         <p>Todos los productos están sujetos a disponibilidad. Nos reservamos el derecho de modificar precios sin previo aviso, aunque los precios vigentes al momento de la compra serán respetados.</p>
-
         <h2>💳 Pagos</h2>
         <p>Los pagos se realizan a través de los métodos acordados con el cliente, principalmente mediante transferencia bancaria, depósito o contacto directo por WhatsApp.</p>
-
         <h2>⚠️ Responsabilidad</h2>
         <p>No nos hacemos responsables por el mal uso de los productos adquiridos. Recomendamos leer las instrucciones de uso antes de aplicar cualquier producto.</p>
-
         <h2>🔒 Privacidad</h2>
         <p>La información proporcionada por el cliente será utilizada únicamente para gestionar pedidos y no será compartida con terceros, de acuerdo a la Ley N° 19.628.</p>
-
         <div class="terms-date">
           <strong>Última actualización:</strong> Abril 2026
         </div>
