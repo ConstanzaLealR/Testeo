@@ -588,25 +588,25 @@ function setProductImages() {
   const slides = document.querySelectorAll('.featured-slide-item');
   
   // Asigna cada imagen manualmente:
-  if(slides[0]) slides[0].querySelector('img').src = 'img/image1.png';
-  if(slides[1]) slides[1].querySelector('img').src = 'img/image2.png';
-  if(slides[2]) slides[2].querySelector('img').src = 'img/image3.png';
-  if(slides[3]) slides[3].querySelector('img').src = 'img/image4.png';
-  if(slides[4]) slides[4].querySelector('img').src = 'img/image5.png';
-  if(slides[5]) slides[5].querySelector('img').src = 'img/image6.png';
-  if(slides[6]) slides[6].querySelector('img').src = 'img/image7.png';
-  if(slides[7]) slides[7].querySelector('img').src = 'img/image8.png';
-  if(slides[8]) slides[8].querySelector('img').src = 'img/image9.png';
-  if(slides[9]) slides[9].querySelector('img').src = 'img/image10.png';
-  if(slides[10]) slides[10].querySelector('img').src = 'img/image11.png';
-  if(slides[11]) slides[11].querySelector('img').src = 'img/image12.png';
-  if(slides[12]) slides[12].querySelector('img').src = 'img/image13.png';
-  if(slides[13]) slides[13].querySelector('img').src = 'img/image14.png';
-  if(slides[14]) slides[14].querySelector('img').src = 'img/image15.png';
-  if(slides[15]) slides[15].querySelector('img').src = 'img/image16.png';
-  if(slides[16]) slides[16].querySelector('img').src = 'img/image17.png';
-  if(slides[17]) slides[17].querySelector('img').src = 'img/image18.png';
-  if(slides[18]) slides[18].querySelector('img').src = 'img/image19.png';
+  if(slides[0]) slides[0].querySelector('img').src = './img/image1.png';
+  if(slides[1]) slides[1].querySelector('img').src = './img/image2.png';
+  if(slides[2]) slides[2].querySelector('img').src = './img/image3.png';
+  if(slides[3]) slides[3].querySelector('img').src = './img/image4.png';
+  if(slides[4]) slides[4].querySelector('img').src = './img/image5.png';
+  if(slides[5]) slides[5].querySelector('img').src = './img/image6.png';
+  if(slides[6]) slides[6].querySelector('img').src = './img/image7.png';
+  if(slides[7]) slides[7].querySelector('img').src = './img/image8.png';
+  if(slides[8]) slides[8].querySelector('img').src = './img/image9.png';
+  if(slides[9]) slides[9].querySelector('img').src = './img/image10.png';
+  if(slides[10]) slides[10].querySelector('img').src = './img/image11.png';
+  if(slides[11]) slides[11].querySelector('img').src = './img/image12.png';
+  if(slides[12]) slides[12].querySelector('img').src = './img/image13.png';
+  if(slides[13]) slides[13].querySelector('img').src = './img/image14.png';
+  if(slides[14]) slides[14].querySelector('img').src = './img/image15.png';
+  if(slides[15]) slides[15].querySelector('img').src = './img/image16.png';
+  if(slides[16]) slides[16].querySelector('img').src = './img/image17.png';
+  if(slides[17]) slides[17].querySelector('img').src = './img/image18.png';
+  if(slides[18]) slides[18].querySelector('img').src = './img/image19.png';
 }
 
 function setProductNames() {
