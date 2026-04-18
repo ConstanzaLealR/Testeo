@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renovadores - Tu Tienda</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+<div class="top-bar">
+  🚚 Envíos a todo Chile | 💬 Compra directo por WhatsApp
+</div>
+
+<header>
+  <div class="header-content">
+    <a href="../../index.html" class="logo">
+      <img src="../../img/logo.png" alt="Logo">
+    </a>
+    <div class="search-box">
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar productos...">
+        <button class="search-btn">Buscar</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="categories">
+  <button onclick="window.location.href='../../index.html'">INICIO</button>
+  <button onclick="window.location.href='../../index.html#categoriasContainer'">PRODUCTOS</button>
+  <button onclick="window.location.href='../../index.html#catalogoSection'">CATÁLOGO</button>
+  <button onclick="window.location.href='../../index.html#footer'">CONTACTO</button>
+</nav>
+
+<div class="products-section">
+  <div class="products-header">
+    <h2 class="products-title">🔄 Renovadores</h2>
+    <p class="products-subtitle">Renueva y revitaliza superficies</p>
+  </div>
+  <div class="products-grid" id="products"></div>
+</div>
+
+<footer class="footer" id="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Nosotros</h3>
+      <p>Somos una tienda dedicada a productos de limpieza de alta calidad para el hogar y empresas.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Contacto</h3>
+      <p>📞 +56 9 9299 9340</p>
+      <p>📞 +56 9 9254 9403</p>
+      <div class="social-icons">
+        <a href="https://wa.me/56992999340" target="_blank" class="social-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.tiktok.com/@pinturaspisos.brillos" target="_blank" class="social-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+        </a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Información</h3>
+      <ul>
+        <li><a href="../acerca.html" target="_blank">Acerca de nosotros</a></li>
+        <li><a href="../envios.html" target="_blank">Políticas de envío</a></li>
+        <li><a href="#" onclick="openTerms()">Términos y condiciones</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-address">
+    <p>📍 Av. Sur 915, 8030433 El Bosque, Región Metropolitana, Chile</p>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Tu Tienda - Todos los derechos reservados
+  </div>
+</footer>
+
+<button id="scrollTopBtn" class="scroll-top-btn" title="Volver arriba">↑</button>
+
+<div id="termsModal" class="modal">
+  <div class="modal-box modal-large">
+    <span class="close-terms">&times;</span>
+    <div id="termsContent">
+      <div class="terms-card">
+        <h1>📋 Términos y Condiciones</h1>
+        <p>Al utilizar este sitio web, aceptas los siguientes términos y condiciones:</p>
+        <h2>📌 Uso del sitio</h2>
+        <p>El usuario se compromete a utilizar este sitio de forma responsable y sin infringir la ley.</p>
+        <div class="highlight-box">
+          <strong>✨ Nuestro compromiso:</strong> Productos de limpieza de alta calidad que <strong>no se salen con el agua</strong>, pensados para durar.
+        </div>
+        <h2>📦 Productos</h2>
+        <p>Todos los productos están sujetos a disponibilidad. Nos reservamos el derecho de modificar precios sin previo aviso, aunque los precios vigentes al momento de la compra serán respetados.</p>
+        <h2>💳 Pagos</h2>
+        <p>Los pagos se realizan a través de los métodos acordados con el cliente, principalmente mediante transferencia bancaria, depósito o contacto directo por WhatsApp.</p>
+        <h2>⚠️ Responsabilidad</h2>
+        <p>No nos hacemos responsables por el mal uso de los productos adquiridos. Recomendamos leer las instrucciones de uso antes de aplicar cualquier producto.</p>
+        <h2>🔒 Privacidad</h2>
+        <p>La información proporcionada por el cliente será utilizada únicamente para gestionar pedidos y no será compartida con terceros, de acuerdo a la Ley N° 19.628.</p>
+        <div class="terms-date">
+          <strong>Última actualización:</strong> Abril 2026
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../js/app.js"></script>
+<script src="../../js/categories.js"></script>
+</body>
+</html>
